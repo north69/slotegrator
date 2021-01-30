@@ -1,0 +1,29 @@
+{
+    "name": "slotegrator/sweepstakes",
+    "description": "Simple contest app",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Roman Kalinin",
+            "email": "fabulous.ept@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "symfony/routing": "^5.2",
+        "symfony/http-foundation": "^5.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Unit\\": "tests/"
+        }
+    }
+}

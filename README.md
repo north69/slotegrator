@@ -2,6 +2,6 @@
 
 how to launch this project
 
-`docker-compose up -d`
+>./up.sh
 
 see on <localhost:8084>
