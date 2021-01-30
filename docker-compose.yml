@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+  nginx:
+    image: nginx
+    restart: always
+    ports:
+      - 8084:80
+    volumes:
+      - nginx-logs:/var/log/nginx
+      - ./docker/nginx/default.conf.nginx:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/nginx.conf.nginx:/etc/nginx/nginx.conf
+      - ./public:/app/public
+    depends_on:
+      - php
+
+  php:
+    image: krakenmsk/php:v5
+    restart: always
+    environment:
+      XDEBUG_CONFIG: "client_host=host.docker.internal mode=debug client_port=9001 discover_client_host=true"
+      PHP_IDE_CONFIG: "serverName=slotegrator"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0.16
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    user: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - 3309:3306
+
+volumes:
+  db-data:
+  nginx-logs:
