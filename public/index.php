@@ -1,6 +1,5 @@
 <?php
 
-use Common\Index;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -11,7 +10,7 @@ use Symfony\Component\Routing\RouteCollection;
 
 require dirname(__DIR__).'/config/bootstrap.php';
 
-$route = new Route('/blog/{slug}', ['_controller' => Index::class]);
+$route = new Route('/api/hello', ['_controller' => [\Common\IndexController::class, 'index']]);
 $routes = new RouteCollection();
 $routes->add('blog_show', $route);
 
@@ -34,6 +33,14 @@ try {
     die;
 }
 
+if (!array($parameters['_controller'])) {
+    throw new \Exception('`_controller` must be type of array');
+}
 
-$index = new Index();
-$index->hello();
+$controller_class_name = $parameters['_controller'][0];
+$controller_method_name = $parameters['_controller'][1].'Action';
+
+$controller = new $controller_class_name();
+/** @var \Symfony\Component\HttpFoundation\Response $response */
+$response = $controller->$controller_method_name();
+$response->send();

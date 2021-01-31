@@ -5,12 +5,28 @@ server {
 
     root /app/public;
 
-    location ~ \.(js|svg) {
-        root /app/public;
+    location /css {
+        root /app/public/build;
+        try_files $uri =404;
+    }
+
+    location /js {
+        root /app/public/build;
+        try_files $uri =404;
+    }
+
+    location /img {
+        root /app/public/build;
+        try_files $uri =404;
+    }
+
+    location /api {
+        try_files $uri @rewriteapp;
     }
 
     location / {
-        try_files $uri @rewriteapp;
+        root /app/public/build;
+        try_files /index.html =404;
     }
 
     location @rewriteapp {
