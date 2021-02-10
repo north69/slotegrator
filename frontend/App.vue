@@ -1,28 +1,45 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <component :is="layout" id="app">
+    <router-view />
+  </component>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from "axios";
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  computed: {
+    layout() {
+      return `${this.$route.meta.layout || 'default'}-layout`;
+    }
+  },
+  created() {
+    let isAuthenticated = JSON.parse(this.$parent.$el.attributes["data-is-authenticated"].value),
+        user = JSON.parse(this.$parent.$el.attributes["data-user"].value);
+
+    let payload = { isAuthenticated: isAuthenticated, user: user };
+    this.$store.dispatch("security/onRefresh", payload);
+
+    axios.interceptors.response.use(undefined, (err) => {
+      return new Promise(() => {
+        if (err.response.status === 401) {
+          this.$router.push({path: "/login"})
+        } else if (err.response.status === 500) {
+          document.open();
+          document.write(err.response.data);
+          document.close();
+        }
+        throw err;
+      });
+    });
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html, body, #app {
+  height: 100%;
 }
 </style>
+
