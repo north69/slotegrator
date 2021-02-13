@@ -15,11 +15,8 @@ export default {
     }
   },
   created() {
-    let isAuthenticated = JSON.parse(this.$parent.$el.attributes["data-is-authenticated"].value),
-        user = JSON.parse(this.$parent.$el.attributes["data-user"].value);
-
-    let payload = { isAuthenticated: isAuthenticated, user: user };
-    this.$store.dispatch("security/onRefresh", payload);
+    this.$store.dispatch("app/load");
+    console.log(1);
 
     axios.interceptors.response.use(undefined, (err) => {
       return new Promise(() => {

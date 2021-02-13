@@ -40,6 +40,6 @@ class HttpKernel
 
         $controller = new $controller_class_name();
         /** @var \Symfony\Component\HttpFoundation\Response $response */
-        return $response = $controller->$controller_method_name();
+        return $response = $controller->$controller_method_name($request);
     }
 }

@@ -4,7 +4,7 @@
       <b-navbar type="light" class="border-bottom">
         <b-navbar-brand to="/home">
           <b-icon icon="controller" variant="light" font-scale="1.45" class="rounded-circle bg-primary p-1 align-middle" />
-          B2B-board
+          Sweepstakes
         </b-navbar-brand>
         <b-collapse is-nav>
           <b-navbar-nav v-if="isAuthenticated" class="align-items-center ml-auto">
@@ -32,7 +32,7 @@
     <footer :class="[$style.footer, 'border-top']">
       <b-container fluid>
         <small>
-          Sweepstakes <strong>slotegrator</strong>
+          Sweepstakes <strong>sweepstakes</strong>
           © 2021
         </small>
       </b-container>

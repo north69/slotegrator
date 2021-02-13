@@ -3,12 +3,6 @@ import VueRouter from "vue-router";
 import store from "../store";
 import Home from "../views/Home";
 import Login from "../views/Login";
-import ProductCreate from "../views/product/ProductCreate";
-import Personal from "../views/personal/Personal";
-import InSale from "../views/personal/InSale";
-import Archive from "../views/personal/Archive";
-import Sold from "../views/personal/Sold";
-import ProductView from "../views/product/ProductView";
 
 Vue.use(VueRouter);
 
@@ -17,13 +11,6 @@ let router = new VueRouter({
   routes: [
     { path: "/home", component: Home, meta: { requiresAuth: true }},
     { path: "/login", component: Login, meta: {layout: 'none'} },
-    { path: "/personal", component: Personal, meta: { requiresAuth: true }, children: [
-      { path: "", component: InSale},
-      { path: "sold", component: Sold },
-      { path: "archive", component: Archive },
-    ]},
-    { path: "/product/create", component: ProductCreate, meta: { requiresAuth: true } },
-    { path: "/product/view/:id", component: ProductView, meta: { requiresAuth: true } },
     { path: "*", redirect: "/home" }
   ],
 });

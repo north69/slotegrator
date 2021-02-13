@@ -24,7 +24,10 @@ export default {
     error(state) {
       return state.error;
     },
-    product(state) {
+    hasPrize(state) {
+      return state.prize !== null;
+    },
+    prize(state) {
       return state.prize;
     }
   },
