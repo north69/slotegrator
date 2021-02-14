@@ -15,9 +15,6 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("app/load");
-    console.log(1);
-
     axios.interceptors.response.use(undefined, (err) => {
       return new Promise(() => {
         if (err.response.status === 401) {

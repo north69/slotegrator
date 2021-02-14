@@ -8,17 +8,11 @@
         </b-navbar-brand>
         <b-collapse is-nav>
           <b-navbar-nav v-if="isAuthenticated" class="align-items-center ml-auto">
-            <b-nav-item to="/product/create" class="mr-1" link-classes="p-0">
-              <b-button variant="primary" size="sm">
-                Разместить объявление
-              </b-button>
-            </b-nav-item>
             <b-nav-item-dropdown right>
               <template v-slot:button-content>
                 <em>{{ getUsername }}</em>
               </template>
-              <b-dropdown-item to="/personal">Мои объявления</b-dropdown-item>
-              <b-dropdown-item @click="logout()">Выйти</b-dropdown-item>
+              <b-dropdown-item @click="logout()">Sign out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -32,7 +26,7 @@
     <footer :class="[$style.footer, 'border-top']">
       <b-container fluid>
         <small>
-          Sweepstakes <strong>sweepstakes</strong>
+          Sweepstakes
           © 2021
         </small>
       </b-container>

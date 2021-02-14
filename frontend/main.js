@@ -17,9 +17,13 @@ Vue.component('none-layout', None);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-new Vue({
-  components: { App },
-  template: "<App/>",
-  router,
-  store
-}).$mount("#app");
+store.dispatch("app/load").then(app_data => {
+  store.dispatch("security/onRefresh", app_data);
+
+  new Vue({
+    render: h => h(App),
+    router,
+    store
+  }).$mount('#app')
+});
+

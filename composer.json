@@ -14,6 +14,7 @@
         "symfony/http-foundation": "^5.2",
         "vlucas/phpdotenv": "^5.3",
         "ext-pdo": "^7.4",
+        "ext-json": "*",
         "delight-im/auth": "^8.2",
         "robmorgan/phinx": "^0.12.5"
     },

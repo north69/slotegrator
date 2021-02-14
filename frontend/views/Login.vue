@@ -10,14 +10,14 @@
             flip-v
             class="rounded bg-primary p-2 align-middle"
           />
-          <h1 class="h2 mb-3">Log in</h1>
+          <h1 class="h2 mb-3">Sign in to sweepstakes</h1>
           <b-form class="login-form" @submit.prevent="performLogin">
             <b-form-group>
               <b-input-group>
                 <b-form-input
                   v-model="login"
                   type="text"
-                  placeholder="username"
+                  placeholder="Username"
                   autocomplete="off"
                 />
               </b-input-group>
@@ -29,7 +29,7 @@
                 />
               </b-input-group>
             </b-form-group>
-            <b-button block type="submit" variant="primary" :disabled="canSubmit">Log in</b-button>
+            <b-button block type="submit" variant="primary" :disabled="canSubmit">Sign in</b-button>
           </b-form>
           <p v-if="hasError" class="mt-2">
             <error-message :error="error" />
@@ -70,7 +70,6 @@ export default {
   },
   created() {
     let redirect = this.$route.query.redirect;
-    console.log(2);
 
     if (this.$store.getters["security/isAuthenticated"]) {
       if (typeof redirect !== "undefined") {
@@ -86,6 +85,7 @@ export default {
         redirect = this.$route.query.redirect;
 
       await this.$store.dispatch("security/login", payload);
+      await this.$store.dispatch("app/load");
       if (!this.$store.getters["security/hasError"]) {
         if (typeof redirect !== "undefined") {
           await this.$router.push({path: redirect});

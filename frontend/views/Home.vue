@@ -1,19 +1,19 @@
 <template>
   <div>
-    <h2 class="mb-4 mt-4">Sweepstakes</h2>
+    <h2 class="mb-4 mt-4">Page with prizes</h2>
     <b-row>
       <b-col md="8">
-        <p v-if="!hasPrize && prizesAreAvailable">
-          You should try win a prize
-        </p>
-        <p v-if="hasPrize">
-          You have a prize
-        </p>
-        <p v-if="!prizesAreAvailable">
-          There are no prizes left
-        </p>
         <p v-if="hasError">
           <error-message :error="error" />
+        </p>
+        <p v-else-if="!hasPrize && prizesAreAvailable ">
+          You should try win a prize
+        </p>
+        <p v-else-if="hasPrize">
+          You have a prize
+        </p>
+        <p v-else-if="!prizesAreAvailable">
+          There are no prizes left
         </p>
       </b-col>
     </b-row>

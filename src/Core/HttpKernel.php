@@ -5,6 +5,7 @@ namespace Core;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
@@ -23,7 +24,7 @@ class HttpKernel
 
         try {
             $parameters = $matcher->match($request->getPathInfo());
-        } catch (ResourceNotFoundException $e) {
+        } catch (MethodNotAllowedException | ResourceNotFoundException $e) {
             $data = [
                 'code' => 404,
                 'message' => JsonResponse::$statusTexts[404],

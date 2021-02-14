@@ -15,8 +15,9 @@ class IndexController
 
     public function loginAction(Request $request): JsonResponse
     {
-        $login = $request->query->get('login');
-        $password = $request->query->get('password');
+        $data = json_decode($request->getContent(), true);
+        $login = $data['username'] ?? null;
+        $password = $data['password'] ?? null;
         if (!$login || !$password) {
             return $this->jsonErrorResponse(JsonResponse::HTTP_BAD_REQUEST);
         }
@@ -24,7 +25,7 @@ class IndexController
             $this->mergeErrors(Auth::i()->getErrorContainer());
             return $this->jsonErrorResponse(JsonResponse::HTTP_BAD_REQUEST, $this->getErrors());
         }
-        return $this->jsonResponse();
+        return $this->jsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
 
     public function logoutAction(): JsonResponse

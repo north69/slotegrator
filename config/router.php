@@ -12,12 +12,12 @@ $routes_map = [
     'login' => [
         'path' => '/api/security/login',
         'meta' => ['_controller' => [\Security\IndexController::class, 'login']],
-        'methods' => ['GET'],
+        'methods' => ['POST'],
     ],
     'logout' => [
         'path' => '/api/security/logout',
         'meta' => ['_controller' => [\Security\IndexController::class, 'logout']],
-        'methods' => ['GET'],
+        'methods' => ['POST'],
     ]
 ];
 

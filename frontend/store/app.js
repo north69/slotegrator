@@ -56,7 +56,6 @@ export default {
           return false;
         }
         commit(FETCHING_SUCCESS, response.data);
-        await this.$store.dispatch("security/onRefresh", response.data);
         return response.data;
       } catch (error) {
         commit(FETCHING_ERROR, 'There is an error occurred during request');

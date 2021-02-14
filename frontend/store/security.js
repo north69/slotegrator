@@ -1,4 +1,5 @@
 import SecurityAPI from "../api/security";
+import store from "../store"
 
 const AUTHENTICATING = "AUTHENTICATING",
   AUTHENTICATING_SUCCESS = "AUTHENTICATING_SUCCESS",
@@ -42,10 +43,11 @@ export default {
       state.isAuthenticated = false;
       state.user = null;
     },
-    [AUTHENTICATING_SUCCESS](state) {
+    [AUTHENTICATING_SUCCESS](state, payload) {
       state.isLoading = false;
       state.error = null;
       state.isAuthenticated = true;
+      state.user = payload.user;
     },
     [AUTHENTICATING_ERROR](state, error) {
       state.isLoading = false;
@@ -77,7 +79,8 @@ export default {
           commit(AUTHENTICATING_ERROR, response.data.errors[0].message);
           return false;
         }
-        commit(AUTHENTICATING_SUCCESS);
+        let app_data = await store.dispatch("app/load");
+        commit(AUTHENTICATING_SUCCESS, app_data);
         return true;
       } catch (error) {
         commit(AUTHENTICATING_ERROR, 'There is an error occurred during request');
