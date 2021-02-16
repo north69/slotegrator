@@ -26,11 +26,9 @@ class Auth
         return static::$instance;
     }
 
-    public function createUser(string $username, string $password, string $email)
+    public function createUser(string $username, string $password, string $email): int
     {
-        $user_id = $this->auth_service->admin()->createUser($email, $password, $username);
-
-        echo 'We have signed up a new user with the ID ' . $user_id;
+        return $this->auth_service->admin()->createUser($email, $password, $username);
     }
 
     public function login(string $username, string $password): bool {

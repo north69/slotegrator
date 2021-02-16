@@ -110,11 +110,9 @@ components:
           type: string
           enum:
             - money
-            - rebait_point
-            - product
+            - bonus
+            - gift
         title:
-          type: string
-        description:
           type: string
 
   responses:

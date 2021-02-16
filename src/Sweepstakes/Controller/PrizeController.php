@@ -5,6 +5,7 @@ namespace Sweepstakes\Controller;
 use Core\AbstractController;
 use Core\ApiControllerTrait;
 use Core\Auth\Auth;
+use Sweepstakes\DataProvider\PrizeListDataProvider;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,13 +28,8 @@ class PrizeController extends AbstractController
 
     public function getListAction(): JsonResponse
     {
-        return $this->jsonResponse([
-            [
-                'user_id' => 1,
-                'type' => 'money',
-                'title' => '100$',
-                'description' => 'One hundred dollars'
-            ]
-        ]);
+        $user_id = Auth::i()->getUser()->getId();
+        $data = (new PrizeListDataProvider($user_id))->getData();
+        return $this->jsonResponse($data);
     }
 }

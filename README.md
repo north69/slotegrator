@@ -6,8 +6,13 @@ how to launch this project
 
 see on <localhost:8084>
 
+how to add a user
+```
+docker-compose exec php bash
+bin/console user:add 
+```
 
-front
+## frontend
 
 ## Project setup
 ```

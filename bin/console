@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+require_once dirname(__DIR__).'/config/bootstrap.php';
+
+use Symfony\Component\Console\Application;
+
+$application = new Application('Sweepstakes app helper', '1.0');
+
+$output = new \Symfony\Component\Console\Output\ConsoleOutput();
+$application->addCommands([
+    new \Core\Auth\Command\AddUserCommand(),
+]);
+
+$return_code = (int)$application->run(null, $output);
+exit($return_code);
