@@ -18,7 +18,17 @@ $routes_map = [
         'path' => '/api/security/logout',
         'meta' => ['_controller' => [\Security\IndexController::class, 'logout']],
         'methods' => ['POST'],
-    ]
+    ],
+    'generate_prize' => [
+        'path' => '/api/prizes',
+        'meta' => ['_controller' => [\Sweepstakes\Controller\PrizeController::class, 'generate']],
+        'methods' => ['POST'],
+    ],
+    'get_prize_list' => [
+        'path' => '/api/prizes',
+        'meta' => ['_controller' => [\Sweepstakes\Controller\PrizeController::class, 'getList']],
+        'methods' => ['GET'],
+    ],
 ];
 
 $routes = new RouteCollection();

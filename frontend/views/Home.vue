@@ -6,12 +6,19 @@
         <p v-if="hasError">
           <error-message :error="error" />
         </p>
-        <p v-else-if="!hasPrize && prizesAreAvailable ">
-          You should try win a prize
-        </p>
-        <p v-else-if="hasPrize">
-          You have a prize
-        </p>
+        <div v-else-if="!hasPrize && prizesAreAvailable">
+          <b-overlay :show="isLoading" rounded="sm">
+            <b-jumbotron header="Great news!" lead="There is a chance to win money, gift or some schmeckles">
+              <p>You should try to win a prize</p>
+              <b-button variant="primary" href="#">Let's try</b-button>
+            </b-jumbotron>
+          </b-overlay>
+        </div>
+        <div v-else-if="hasPrize">
+            <b-card title="Congratulations!" :aria-hidden="isLoading ? 'true' : null">
+              <b-card-text>You have a prize</b-card-text>
+            </b-card>
+        </div>
         <p v-else-if="!prizesAreAvailable">
           There are no prizes left
         </p>

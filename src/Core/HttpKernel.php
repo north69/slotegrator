@@ -40,6 +40,13 @@ class HttpKernel
         $controller_method_name = $parameters['_controller'][1].'Action';
 
         $controller = new $controller_class_name();
+        if (!is_a($controller, AbstractController::class)) {
+            throw new \Exception("`{$controller_class_name}` must be type of ". AbstractController::class);
+        }
+        $before_action_result = $controller->beforeAction();
+        if (is_a($before_action_result, Response::class)) {
+            return $before_action_result;
+        }
         /** @var \Symfony\Component\HttpFoundation\Response $response */
         return $response = $controller->$controller_method_name($request);
     }

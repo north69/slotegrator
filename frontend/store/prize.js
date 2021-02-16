@@ -95,11 +95,7 @@ export default {
           return null;
         }
         let prize = response.data.length > 0 ? response.data[0] : null;
-        if (!prize) {
-          commit(FETCHING_PRIZE_ERROR, 'There is an error occurred during fetching a prize');
-          return null;
-        }
-        commit(FETCHING_PRIZE_SUCCESS, response.data);
+        commit(FETCHING_PRIZE_SUCCESS, prize);
         return response.data;
       } catch (error) {
         commit(FETCHING_PRIZE_ERROR, 'There is an error occurred during fetching a prize');

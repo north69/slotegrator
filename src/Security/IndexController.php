@@ -2,13 +2,14 @@
 
 namespace Security;
 
+use Core\AbstractController;
 use Core\ApiControllerTrait;
 use Core\Auth\Auth;
 use Core\ErrorContainer\ApiErrorContainerTrait;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class IndexController
+class IndexController extends AbstractController
 {
     use ApiControllerTrait;
     use ApiErrorContainerTrait;

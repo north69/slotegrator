@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use Core\AbstractController;
 use Core\Auth\Auth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class IndexController
+class IndexController extends AbstractController
 {
     public function getAppConfigAction(): JsonResponse
     {

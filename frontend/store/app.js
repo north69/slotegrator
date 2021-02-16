@@ -36,7 +36,7 @@ export default {
     [FETCHING_SUCCESS](state, payload) {
       state.isLoading = false;
       state.error = null;
-      state.prizesAreAvailable = payload.prizesAreAvailable;
+      state.prizesAreAvailable = payload.prizes_are_available;
       state.user = payload.user
     },
     [FETCHING_ERROR](state, error) {
