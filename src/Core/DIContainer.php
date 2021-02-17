@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use Core\Doctrine\Rand;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 
@@ -56,6 +57,7 @@ class DIContainer
             static function ($asset) {
                 return preg_match('~^(?!users_)~', $asset);
             });
+        $config->addCustomNumericFunction('RAND', Rand::class);
         $conn = [
             'driver' => 'pdo_mysql',
             'server_version' => '8.0',

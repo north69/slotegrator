@@ -36,9 +36,10 @@ export default {
       state.isLoading = true;
       state.error = null;
     },
-    [CREATING_SUCCESS](state) {
+    [CREATING_SUCCESS](state, prize) {
       state.isLoading = false;
       state.error = null;
+      state.prize = prize;
     },
     [CREATING_ERROR](state, error) {
       state.isLoading = false;
@@ -65,7 +66,7 @@ export default {
       commit(CREATING);
       try {
         let create_response = await PrizeAPI.create();
-        if (create_response.status !== 204) {
+        if (create_response.status !== 201) {
           commit(CREATING_ERROR, 'There is an error occurred during generating a prize');
           return null;
         }
@@ -79,7 +80,7 @@ export default {
           commit(CREATING_ERROR, 'There is an error occurred during generating a prize');
           return null;
         }
-        commit(CREATING_SUCCESS);
+        commit(CREATING_SUCCESS, prize);
         return prize;
       } catch (error) {
         commit(CREATING_ERROR, 'There is an error occurred during generating a prize');

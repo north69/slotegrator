@@ -15,6 +15,7 @@ class GeneratorFactory
     {
         return [
             new MoneyGenerator($this->user_id),
+            new GiftGenerator($this->user_id),
         ];
     }
 
