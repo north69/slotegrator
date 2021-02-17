@@ -13,6 +13,11 @@ class AccountTransaction
     public const TYPE_MONEY = SweepstakesAccount::TYPE_MONEY;
     public const TYPE_BONUSES = SweepstakesAccount::TYPE_BONUSES;
 
+    public static function getTypeByAccountType(int $type): int
+    {
+        return $type;
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
