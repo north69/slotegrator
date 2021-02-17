@@ -10,13 +10,13 @@
           <b-overlay :show="isLoading" rounded="sm">
             <b-jumbotron header="Great news!" lead="There is a chance to win money, gift or some schmeckles">
               <p>You should try to win a prize</p>
-              <b-button variant="primary" href="#">Let's try</b-button>
+              <b-button variant="primary" @click="generatePrize()">Let's try</b-button>
             </b-jumbotron>
           </b-overlay>
         </div>
         <div v-else-if="hasPrize">
             <b-card title="Congratulations!" :aria-hidden="isLoading ? 'true' : null">
-              <b-card-text>You have a prize</b-card-text>
+              <b-card-text>You prize is {{ prize.title }}</b-card-text>
             </b-card>
         </div>
         <p v-else-if="!prizesAreAvailable">
@@ -54,6 +54,11 @@ export default {
     },
     prize() {
       return this.$store.getters["prize/prize"];
+    }
+  },
+  methods: {
+    async generatePrize() {
+      await this.$store.dispatch('prize/create');
     }
   },
   created() {

@@ -33,5 +33,46 @@ class SweepstakesAccount
     /**
      * @ORM\Column(type="float")
      **/
-    private $left;
+    private $free;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type): void
+    {
+        $this->type = $type;
+    }
+
+    public function getSpent()
+    {
+        return $this->spent;
+    }
+
+    public function setSpent($spent): void
+    {
+        $this->spent = $spent;
+    }
+
+    public function getFree()
+    {
+        return $this->free;
+    }
+
+    public function setFree($free): void
+    {
+        $this->free = $free;
+    }
+
 }

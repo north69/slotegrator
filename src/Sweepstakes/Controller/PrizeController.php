@@ -6,6 +6,7 @@ use Core\AbstractController;
 use Core\ApiControllerTrait;
 use Core\Auth\Auth;
 use Sweepstakes\DataProvider\PrizeListDataProvider;
+use Sweepstakes\EventHandler\PrizeCreateEventHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -23,6 +24,11 @@ class PrizeController extends AbstractController
 
     public function generateAction(): JsonResponse
     {
+        $user_id = Auth::i()->getUser()->getId();
+        $handler = new PrizeCreateEventHandler();
+        if (!$handler->handle($user_id)) {
+            return $this->jsonErrorResponse(Response::HTTP_BAD_REQUEST);
+        }
         return $this->jsonResponse(null, Response::HTTP_CREATED);
     }
 
